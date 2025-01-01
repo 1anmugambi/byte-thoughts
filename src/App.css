@@ -5,6 +5,7 @@ body, html {
   font-family: 'Poppins', sans-serif;
   background-color: var(--bg-color);
   color: var(--text-color);
+  overflow-x: hidden; /* Prevent horizontal scrolling */
   transition: background-color 0.5s ease, color 0.5s ease;
 }
 
@@ -15,9 +16,9 @@ body, html {
   --header-bg: #007bff;
   --header-text: #ffffff;
   --note-bg: #ffffff;
-  --note-border: #dddddd; 
+  --note-border: #dddddd;
   --note-text: #000000;
-  --button-bg: #4caf50; 
+  --button-bg: #4caf50;
   --button-hover: #45a049;
 }
 
@@ -27,12 +28,11 @@ body.dark-mode {
   --header-bg: #292929;
   --header-text: #4caf50;
   --note-bg: #2a2a2a;
-  --note-border: #444444; 
+  --note-border: #444444;
   --note-text: #e0e0e0;
   --button-bg: #007bff;
   --button-hover: #0056b3;
 }
-
 
 /* App Styling */
 .App {
@@ -61,9 +61,18 @@ header {
   align-items: center;
 }
 
-/* Button Styling */
+/* Responsive header for small screens */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+}
+
+/* Header button styling */
 header button {
-  background-color: #16a085; /* Professional, calm green */
+  background-color: #16a085;
   color: white;
   padding: 8px 16px;
   border: none;
@@ -73,11 +82,47 @@ header button {
   transition: background-color 0.3s ease-in-out;
 }
 
-/* Input Styling for Search */
+header button:hover {
+  background-color: #1abc9c;
+}
+
+/* Responsive button adjustments */
+button {
+  padding: 10px 20px;
+  margin: 10px;
+  background-color: var(--button-bg);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  width: auto;
+  max-width: 100%;
+}
+
+button:hover {
+  background-color: var(--button-hover);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  button {
+    font-size: 0.85rem;
+    padding: 6px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  button {
+    width: 90%;
+  }
+}
+
+/* Input styling for search */
 header input[type="text"] {
   padding: 8px 16px;
   border-radius: 4px;
-  border: 1px solid #bdc3c7; /* Light gray border */
+  border: 1px solid #bdc3c7;
   background-color: #ecf0f1;
   color: #2c3e50;
   font-size: 1rem;
@@ -86,31 +131,43 @@ header input[type="text"] {
 }
 
 header input[type="text"]:focus {
-  border-color: #16a085; /* Green border on focus for consistency */
+  border-color: #16a085;
   outline: none;
 }
 
-header button:hover {
-  background-color: #1abc9c; /* Lighter green for hover effect */
+@media (max-width: 480px) {
+  header input[type="text"] {
+    width: 90%;
+    margin: auto;
+  }
 }
 
+/* Typography */
 header h1 {
   font-size: 2.5rem;
   margin: 0;
 }
 
-header input[type="file"], header input[type="text"] {
-  margin: 10px;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 2rem;
+  }
 }
 
+@media (max-width: 480px) {
+  header h1 {
+    font-size: 1.5rem;
+  }
+}
+
+/* Main container adjustments */
 main {
   width: 100%;
   max-width: 800px;
+  padding: 10px;
 }
 
+/* Textarea and select styling */
 textarea, select {
   width: 100%;
   padding: 10px;
@@ -127,26 +184,14 @@ textarea:focus, select:focus {
   box-shadow: 0 0 8px rgba(76, 175, 80, 0.3);
 }
 
-button {
-  padding: 10px 20px;
-  margin: 10px;
-  background-color: var(--button-bg);
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
-}
-
-button:hover {
-  background-color: var(--button-hover);
-  transform: translateY(-2px);
-}
-
+/* Table styling */
 table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
 }
 
 table th, table td {
@@ -170,19 +215,6 @@ table tr:nth-child(even) td {
 }
 
 @media (max-width: 768px) {
-  header {
-    text-align: center;
-  }
-
-  button {
-    width: 100%;
-    margin-bottom: 10px;
-  }
-
-  textarea, select {
-    width: 100%;
-  }
-
   table {
     font-size: 0.9rem;
   }
